@@ -26,7 +26,7 @@ const showPics=()=>{
     }
 }
 
-const selectİmage=(e)=>{
+const selectImage=(e)=>{
     element = e.target;
 
     if (element.classList.contains('selected')) {
@@ -47,4 +47,47 @@ const selectİmage=(e)=>{
     }
 
 }
-list.addEventListener("click",selectİmage);
+
+const changeImage=(e)=>{
+    if (selecteds.length > 2) {
+        alert('lütfen 2 kutu seçiniz');
+        selecteds.pop();
+    }
+    else if (selecteds.length < 2) {
+        alert('lütfen en az iki kutu seçiniz');
+
+    }
+    else {
+        var selected1 = selecteds[0];
+        var selected2 = selecteds[1];
+        var value1 = resimler[selected1];
+        var value2 = resimler[selected2];
+        document.getElementById(selected1).style.backgroundImage = value2;
+        document.getElementById(selected2).style.backgroundImage = value1;
+
+        for (let i = 1; i < 13; i++) {
+            x = document.getElementById(i);
+            if (x.classList.contains('selected')) {
+                x.classList.remove('selected');
+            }
+            resimler[selected1] = value2;
+            resimler[selected2] = value1;
+
+
+            selecteds = [];
+
+        }
+
+
+
+
+
+    }
+
+}
+
+selecteds = [];
+showPics();
+list.addEventListener("click",selectImage);
+
+button.addEventListener("click",changeImage);
